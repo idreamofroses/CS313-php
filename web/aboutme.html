@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Katherine Hobbs's Home Page</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="home.css">
+    <script src="home.js"></script>
+</head>
+
+<body>
+    <header id="top">
+        <h1>Katherine Hobbs</h1>
+        <h3>Software Engineer</h3>
+            <nav>
+                <a href="home.html" onmouseover="makeBigger('home');" id="home" onmouseout="makeSmaller('home');">Home</a>
+                <a href="aboutme.html" id="aboutMe" onmouseover="makeBigger('aboutme');" onmouseout="makeSmaller('aboutme');">About Me</a>
+                <a href="assignments.html" id="assign" onmouseover="makeBigger('assign');" onmouseout="makeSmaller('assign');">Assignments</a>
+                <a href="contact.html" id="contact" onmouseover="makeBigger('contact');" onmouseout="makeSmaller('contact');">Contact Me</a>
+            </nav>
+    </header>
+
+    <div id="aboutme">
+        <h2><img src="keyboard.webp" alt="keyboard" width="500" class="strong"/>Experience</h2>
+        <p id="allaboutme">I first began programming two years ago, when my husband introduced me to C++. It was at this time that I found my passion, and which has led me study <em>Software Engineering</em>. Since then I have learned to program using JavaScript, HTML/CSS, PHP, as well as SQL. I am currently learning Java. One of my personal goals is to develop software that will revolutionize the world!</p>
+        <button type="button" id="download" onmouseover="makeBigger('download');" onmouseout="makeSmaller('download');"><a href="ResumeKatherineHobbs.pdf" id="read1" download>Download Full Resume</a></button>
+    </div>
+
+    <img src="together.jpg" alt="Katherine and Harlen in orchard" width="525" id="together"/>
+    <div id="favthings">
+        <h2 id="favTitle">My Favorite Things</h2>
+        <ul>
+            <li> Food: Cheesecake</li>
+            <li> Animal: Horse</li>
+            <li> Color: Green</li>
+            <li> Place: Caldwell Idaho Orchard</li>
+            <li> Disney Princess: Belle</li>
+            <li> Flower: Yellow Roses</li>
+            <li> Superhero: Captain America</li>
+            <li> Movie: "Life is Beautiful"</li>
+            <li> Hogwarts House: Gryffindor</li>
+        </ul>
+    </div>
+
+    <div id="myFam">
+        <h2><img src="strong.jpg" alt="Katherine and Harlen in alley-way"
+                 width="250" class="strong"/>About Me &amp; My Family</h2>
+        <p> I am the middle of 4 sisters and a brother. We grew up mostly in <em>Caldwell, Idaho</em>, as well our family spent some time in Kuna and Challis, Idaho. I served a full time mission in Santiago, Chile where I learned to speak Spanish. A short time after my mission I met and married my husband.
+        <p> My husband, Harlen and I met at a dating seminar held on campus at BYU-Idaho. We have been happily married for a year and a half. Harlen enjoys painting models and introducing me to videogames. Together we enjoy going for walks, playing tennis, and camping, babysitting, and attending ward choir. My hobbies include horseback riding, knitting, and baking.</p>
+        <p>Harlen is studying BioChemistry, after graduation he plans to attend BYU to attain a doctorate in Computational Chemistry.</p>
+    </div>
+
+    <footer>
+        <div class="right">
+        <a href="http://www.facebook.com">
+            <img src="facebook.png" alt="facebook icon" height="40"/></a>
+        <a href="https://plus.google.com">
+            <img src="googleplus.png" alt="google plus icon" height="40"/>
+        </a>
+        <a href="http://www.pinterest.com">
+            <img src="pinterest.png" alt="pinterest logo" height="40"/></a>
+        </div>
+
+        <div class="left">
+        <p id="copyright">&copy; 2017 Katherine Hobbs</p>
+        </div>
+    </footer>
+</body>
+</html>
