@@ -1,0 +1,83 @@
+body {
+  background-color: #378983;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 15px;
+}
+h1{
+  text-align: center;
+  font-family: monospace;
+  color: white;
+}
+darla {
+  text-align: center;
+  font-family: monospace;
+  color: white;   
+}
+header {
+  background-color: #004d47;
+  width: 80%;
+  margin: auto;
+  border: dashed;
+}
+div {
+  margin: auto;
+  width: 60%;
+  padding: 20px 10px 20px 10px;
+}
+p {
+  display: inline;
+  color: #9d161d;
+}
+.label {
+  display: inline;
+  color: black;
+}
+input {
+  margin: 5px 5px 5px 5px;
+}
+table, th, td {
+  border: 1.5px solid #52958b;
+  background-color: #004d47;
+  width: 70%;
+  margin: auto;
+}
+th {
+  padding: 15px;
+  font-size: 20px;
+}
+td {
+  padding: 16px;
+  text-align: left;
+}
+.left {
+  width: 48%;
+  float: left;
+}
+.right {
+  padding: 9px 5px 0px 10px;
+    width: 13%;
+    float: right;
+}
+footer {
+  background-color: #004d47;
+  margin: 20px auto 10px auto;
+  width: 95%;
+  overflow: auto;
+  height: 60px;
+}
+#copyright {
+  display: inline;
+  color: white;
+}
+.button {
+  text-align: right;
+  background-color: #004d47;
+  color: white;
+  font-size: 16px;
+  padding: 10px;
+  border: 1.5px solid #52958b;;
+}
+#buttons {
+  text-align: center;
+}
