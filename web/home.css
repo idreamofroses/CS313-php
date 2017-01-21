@@ -59,12 +59,12 @@ body {
             padding-bottom: 15px
         }
         
-        a {
+        a, #assignmentpage {
             color:aliceblue;
             text-decoration: none;
         }
         
-        nav a:link {
+        nav a:link, #assignmentpage:link {
             border: solid;
             padding: 5px 10px 5px 10px;
             text-decoration: none;
@@ -173,7 +173,10 @@ body {
             margin: 20px 0px 0px 500px; 
             padding: 15px;
         }
-        
+        #shop {
+            margin: 10px 0px 75px 210px; 
+            padding: 15px;
+        }
         button a:hover {
             color: #76323f;
         }
@@ -184,7 +187,7 @@ body {
 }
 
 #assignTitle {
-    text-align: center;
+    margin-left: 200px;
 }
 
 #introduction {
@@ -236,4 +239,9 @@ body {
 
 #download {
     margin: 10px 0px 5px 30%;
+}
+#assignmentpage {
+    margin-left:200px;
+    color: blue;
+    text-decoration: underline;
 }

@@ -4,6 +4,9 @@ function makeBigger(value) {
         case "read":
             document.getElementById("read").style.borderWidth = "thick";
             break;
+        case "shop":
+            document.getElementById("shop").style.borderWidth = "thick";
+            break;
         case "home":
             document.getElementById("home").style.borderWidth = "thick";
             break;
@@ -28,6 +31,9 @@ function makeSmaller(value) {
     switch (value) {
         case "read":
             document.getElementById("read").style.borderWidth = "medium";
+            break;
+        case "shop":
+            document.getElementById("shop").style.borderWidth = "medium";
             break;
         case "home":
             document.getElementById("home").style.borderWidth = "medium";
