@@ -7,7 +7,9 @@ function get_db() {
 		$dbPort = "5432";
 		$dbHost = "localhost";
 		$dbName = "storyblanket";
+        echo "here"
 	} else {
+        echo "success"
 		$dbopts = parse_url($dbUrl);
 		$dbHost = $dbopts["host"];
 		$dbPort = $dbopts["port"];
@@ -22,6 +24,6 @@ function get_db() {
 	 print "<p>error: $ex->getMessage() </p>\n\n";
 	 die();
 	}
-	return $db;
+//	return $db;
 }
 ?>
