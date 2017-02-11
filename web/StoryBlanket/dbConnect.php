@@ -1,15 +1,17 @@
 <?php
+echo "php loaded";
 function get_db() {
 	$dbUrl = getenv('DATABASE_URL');
+    echo "URL: $dbUrl";
 	if (empty($dbUrl)) {
 		$dbUser = "blanket_user";
 		$dbPassword = "story";
 		$dbPort = "5432";
 		$dbHost = "localhost";
 		$dbName = "storyblanket";
-        echo "here"
+        echo "here";
 	} else {
-        echo "success"
+        echo "success";
 		$dbopts = parse_url($dbUrl);
 		$dbHost = $dbopts["host"];
 		$dbPort = $dbopts["port"];
