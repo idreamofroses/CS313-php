@@ -1,7 +1,7 @@
 <?php
 echo "php loaded";
 function get_db() {
-	$dbUrl = getenv('DATABASE_URL');
+	$dbUrl = "postgres://rpdblhqsnnjkab:65a4ba798295b69ce1a2d2dd984c7debf0a9783d8ab46388367cb75aedb0a431@ec2-23-23-93-255.compute-1.amazonaws.com:5432/d72ipoofbb416q";
     echo "URL: $dbUrl";
 	if (empty($dbUrl)) {
 		$dbUser = "blanket_user";
