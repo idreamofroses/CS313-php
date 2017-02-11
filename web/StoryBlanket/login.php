@@ -28,11 +28,16 @@
         
         <div class="row">
             <div class="col-sm-4 col-sm-push-4">
+                <br>
+                <form action="newUser.php" method="post">
+                    <h2 class="form-signin-heading text-white text-inline" >Please sign in</h2>
+                    <button class="btn btn-md bg-turk text-white pull-right text-inline" type="submit">New User</button>
+                </form>
+                <br>
                 <form class="form-signin" action="authenticate.php" method="post">
-                    <h2 class="form-signin-heading text-white">Please sign in</h2>
-                    <label for="username" class="sr-only">Username</label>
                     <input type="text" id="username" name="username" class="form-control" placeholder="username" required>
                     <input type="password" id="password" name="password" class="form-control" placeholder="password" required>
+                    <br>
                     <button class="btn btn-md btn-block bg-turk text-white" type="submit">Login</button>
                 </form>
                 <?php

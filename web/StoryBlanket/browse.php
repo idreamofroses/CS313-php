@@ -6,24 +6,16 @@ if (!isset($_SESSION["user"])) {
 	exit();
 }
 $username = $_SESSION["user"];
-$id = $SESSION['id'];
-?>
-<?php //browse varriables
-    $name = htmlspecialchars($_GET['name']);
-?>
-<?php //database
+$id = (int)$_SESSION["id"];
 
-  try
-  {
-    $user = 'postgres';
-    $password = 'Ray@myhero7';
-    $db = new PDO('pgsql:host=127.0.0.1;dbname=storyblanket', $user, $password);
-  }
-    catch (PDOException $ex)
-    {
-        echo 'Error!: ' . $ex->getMessage();
-        die();
-    }
+//browse varriables
+    $name = htmlspecialchars($_GET['name']);
+
+//database
+
+  require("dbConnect.php");
+$db = get_db();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,6 +50,8 @@ $id = $SESSION['id'];
             <li class="active"><a href="browse.php?name=Browse All Patterns" >Browse</a>
             </li>
             <li><a href="favorites.php?name=My Favorites">Favorites</a></li>
+            <li><a href="addNewPattern.php">Add Pattern</a></li>
+            <li><a href="myPatterns.php?name=Browse My Patterns">My Patterns</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="browse.php?name=Browse All Patterns">Welcome, <?php echo $username; ?> </a></li>
@@ -97,7 +91,7 @@ $id = $SESSION['id'];
 
             <!-- Main component for a primary marketing message or call to action -->
             <div class="jumbotron bg-turk">
-                <h1><?php echo $name; ?></h1>
+                <h1><?php echo "$name"; ?></h1>
             </div>
         </div>
 
@@ -209,6 +203,7 @@ $id = $SESSION['id'];
         $stmt = $db->prepare('SELECT u.username
         , p.pattern_title
         , p.pattern_img
+        , p.pattern_id
         , t.time_required
         , b.type
         , b.size 
@@ -222,6 +217,7 @@ $id = $SESSION['id'];
          $stmt = $db->prepare('SELECT u.username
          , p.pattern_title
          , p.pattern_img
+         , p.pattern_id
          , t.time_required
          , b.type
          , b.size 
@@ -237,6 +233,7 @@ $id = $SESSION['id'];
          $stmt = $db->prepare('SELECT u.username
          , p.pattern_title
          , p.pattern_img
+         , p.pattern_id
          , t.time_required
          , b.type
          , b.size 
@@ -252,6 +249,7 @@ $id = $SESSION['id'];
         $stmt = $db->prepare('SELECT u.username
          , p.pattern_title
          , p.pattern_img
+         , p.patten_id
          , t.time_required
          , b.type
          , b.size 
@@ -268,6 +266,7 @@ $id = $SESSION['id'];
          $stmt = $db->prepare('SELECT u.username
          , p.pattern_title
          , p.pattern_img
+         , p.pattern_id
          , t.time_required
          , b.type
          , b.size 
@@ -283,6 +282,7 @@ $id = $SESSION['id'];
          $stmt = $db->prepare('SELECT u.username
          ,   p.pattern_title
          ,   p.pattern_img
+         ,   p.pattern_id
          ,   t.time_required
          ,   b.type 
          ,   b.size
@@ -298,6 +298,7 @@ $id = $SESSION['id'];
          $stmt = $db->prepare('SELECT u.username
          ,   p.pattern_title
          ,   p.pattern_img
+         ,   p.pattern_id
          ,   t.time_required
          ,   b.type 
          ,   b.size
@@ -313,6 +314,7 @@ $id = $SESSION['id'];
          $stmt = $db->prepare('SELECT u.username
          ,   p.pattern_title
          ,   p.pattern_img
+         ,   p.pattern_id
          ,   t.time_required
          ,   b.type 
          ,   b.size
@@ -328,6 +330,7 @@ $id = $SESSION['id'];
         $stmt = $db->prepare('SELECT u.username
         ,   p.pattern_title
         ,   p.pattern_img
+        ,   p.pattern_id
         ,   t.time_required
         ,   b.type 
         ,   b.size
@@ -355,10 +358,17 @@ $id = $SESSION['id'];
                         <th>Save</th>
                     </tr>";
             foreach($rows as $row) {
-            echo "<tr><td>\"".$row['pattern_title']."\" - <br> By: ".$row['username']."</td>";
-            echo "<td><img src=\"".$row['pattern_img']."\" width=\"150\"></td>";
-            echo "<td>Time: ".$row['time_required']."<br> Type: ".$row['type']."<br> Size: ".$row['size']."</td>";   
-            echo "<td><button class=\"btn btn-default\"><span class=\"glyphicon glyphicon-pushpin\"> </span> </button><td></tr>";
+                $title = $row['pattern_title'];
+                $username = $row['username'];
+                $image = $row['pattern_img'];
+                $time = $row['time_required'];
+                $type = $row['type'];
+                $size = $row['size'];
+                $pattern_id = $row['pattern_id'];
+            echo "<tr><td> $title - <br> By: $username</td>";
+            echo "<td><img src='$image' width='150'></td>";
+            echo "<td>Time: $time<br> Type: $type<br> Size: $size</td>"; 
+            echo "<td><form action='save.php' method='get'><input type='hidden' name='name' value='$name' ><input type='hidden' name='pattern' value='$pattern_id'><button type='submit' class='btn btn-default' value='save'><span class='glyphicon glyphicon-pushpin'> </span></button></form><td></tr>";
             
             }
               echo "</table>"; 

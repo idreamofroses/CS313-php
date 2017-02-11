@@ -7,11 +7,11 @@ if (!isset($_SESSION["user"])) {
 }
 $username = $_SESSION["user"];
 $id = (int)$_SESSION["id"];
-?>
-<?php //browse varriables
+
+//browse varriables
     $name = $_GET['name'];
-?>
-<?php //database
+
+//database
 
   require("dbConnect.php");
 $db = get_db();
@@ -49,9 +49,9 @@ $db = get_db();
           <ul class="nav navbar-nav">
             <li><a href="browse.php?name=Browse All Patterns" >Browse</a>
             </li>
-            <li class="active"><a href="favorites.php?name=My Favorites">Favorites</a></li>
+            <li><a href="favorites.php?name=My Favorites">Favorites</a></li>
             <li><a href="addNewPattern.php">Add Pattern</a></li>
-            <li><a href="myPatterns.php?name=Browse My Patterns">My Patterns</a></li>
+            <li class="active"><a href="myPatterns.php?name=Browse My Patterns">My Patterns</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="browse.php?name=Browse All Patterns">Welcome, <?php echo $username; ?> </a></li>
@@ -101,61 +101,53 @@ $db = get_db();
                 <label class="text-white text-inline">Browse By: </label>
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="myLink" href="favorites.php?name=My Favorites">Browse All</a>
+                        <a class="myLink" href="myPatterns.php?name=Browse My Patterns">Browse All</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="myLink dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Blanket Type</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="favorites.php?name=My Pattern Types: A-Z"> All Types: A-Z</a>
+                            <a class="dropdown-item" href="myPatterns.php"> All Types: A-Z</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=My Pattern Types: Z-A"> All Types: Z-A</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=My Pattern Types: Z-A"> All Types: Z-A</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=My Baby Patterns"> Baby</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=My Baby Patterns"> Baby</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=My Throw Patterns"> Throw</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=My Throw Patterns"> Throw</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=My Twin Patterns"> Twin</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=My Twin Patterns"> Twin</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=My Double Patterns"> Double</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=My Double Patterns"> Double</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=My Queen Patterns"> Queen</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=My Queen Patterns"> Queen</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=My King Patterns"> King</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=My King Patterns"> King</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=My Child Patterns"> Child</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=My Child Patterns"> Child</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=My Special Patterns"> Special</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=My Special Patterns"> Special</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="myLink dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Title</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="favorites.php?name=My Pattern Titles: A-Z"> All Titles: A-Z</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=My Pattern Titles: A-Z"> All Titles: A-Z</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=My Pattern Titles: Z-A"> All Titles: Z-A</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="myLink dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Created By</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="favorites.php?name=Created By: A-Z"> Created By: A-Z</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=Created By: Z-A"> Created By: Z-A</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=My Pattern Titles: Z-A"> All Titles: Z-A</a>
                         </div>
                     </li>
                    <li class="nav-item dropdown">
                         <a class="myLink dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Time Required</a>
                         <div class="dropdown-menu">
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=Time Required: 5-10 hours"> 5-10 hours</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=Time Required: 5-10 hours"> 5-10 hours</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=Time Required: 10-15 hours"> 10-15 hours</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=Time Required: 10-15 hours"> 10-15 hours</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=Time Required: 15-20 hours"> 15-20 hours</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=Time Required: 15-20 hours"> 15-20 hours</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=Time Required: 20-25 hours"> 20-25 hours</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=Time Required: 20-25 hours"> 20-25 hours</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="favorites.php?name=Time Required: 25-30 hours"> 25-30 hours</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=Time Required: 25-30 hours"> 25-30 hours</a>
                             <div class="dropdown-divider"></div>
                         </div>
                     </li>
@@ -198,7 +190,7 @@ $db = get_db();
         $time = '25-30 hours';
     } 
                         
-    if($name == 'My Favorites') {
+    if($name == 'Browse My Patterns') {
         $stmt = $db->prepare('SELECT u.username
             ,   p.pattern_id
             ,   p.pattern_title
@@ -216,7 +208,7 @@ $db = get_db();
             ON p.blanket_type = b.size_id
             INNER JOIN saved_pattern sp
             ON p.pattern_id = sp.pattern_id
-            WHERE sp.user_id =:user;');
+            WHERE p.created_by =:user;');
        $stmt->bindValue(':user', $id, PDO::PARAM_INT);
     } else if ($name == 'My Pattern Types: A-Z') {
          $stmt = $db->prepare('SELECT u.username
@@ -235,7 +227,7 @@ $db = get_db();
          ON p.blanket_type = b.size_id
          INNER JOIN saved_pattern sp
          ON p.pattern_id = sp.pattern_id
-         WHERE sp.user_id =:user
+         WHERE p.created_by =:user
          ORDER BY b.type ASC;');
         $stmt->bindValue(':user', $id, PDO::PARAM_INT);
     } else if ($name == 'My Pattern Types: Z-A') {
@@ -255,14 +247,14 @@ $db = get_db();
          ON p.blanket_type = b.size_id
          INNER JOIN saved_pattern sp
          ON p.pattern_id = sp.pattern_id
-         WHERE sp.user_id =:user
+         WHERE p.created_by =:user
          ORDER BY b.type DESC;');
         $stmt->bindValue(':user', $id, PDO::PARAM_INT);
     } else if ($type != "") {
         $stmt = $db->prepare('SELECT u.username
          , p.pattern_title
          , p.pattern_img
-         ,   p.pattern_id
+         , p.pattern_id
          , t.time_required
          , b.type
          , b.size 
@@ -276,7 +268,7 @@ $db = get_db();
          INNER JOIN saved_pattern sp
          ON p.pattern_id = sp.pattern_id
          WHERE b.type =:type
-         AND sp.user_id =:user;');
+         AND p.created_by =:user;');
         $stmt->bindValue(':type', $type, PDO::PARAM_STR);
         $stmt->bindValue(':user', $id, PDO::PARAM_INT);
     } else if ($name == 'My Pattern Titles: A-Z') {
@@ -296,7 +288,7 @@ $db = get_db();
          ON p.blanket_type = b.size_id
          INNER JOIN saved_pattern sp
          ON p.pattern_id = sp.pattern_id
-         WHERE sp.user_id =:user
+         WHERE p.created_by =:user
          ORDER BY p.pattern_title ASC;');
          $stmt->bindValue(':user', $id, PDO::PARAM_INT);
     } else if ($name == 'My Pattern Titles: Z-A') {
@@ -316,50 +308,10 @@ $db = get_db();
          ON p.blanket_type = b.size_id
          INNER JOIN saved_pattern sp
          ON p.pattern_id = sp.pattern_id
-         WHERE sp.user_id =:user
+         WHERE p.created_by =:user
          ORDER BY p.pattern_title DESC;');
         $stmt->bindValue(':user', $id, PDO::PARAM_INT);
-    } else if ($name == 'Created By: A-Z') {
-         $stmt = $db->prepare('SELECT u.username
-         ,   p.pattern_title
-         ,   p.pattern_img
-         ,   p.pattern_id
-         ,   t.time_required
-         ,   b.type 
-         ,   b.size
-         FROM story_blanket_user u 
-         INNER JOIN pattern p 
-         ON p.created_by = u.user_id 
-         INNER JOIN time_required t 
-         ON p.time_required = t.time_id
-         INNER JOIN blanket_size b
-         ON p.blanket_type = b.size_id
-         INNER JOIN saved_pattern sp
-         ON p.pattern_id = sp.pattern_id
-         WHERE sp.user_id =:user
-         ORDER BY u.username ASC;');
-        $stmt->bindValue(':user', $id, PDO::PARAM_INT);
-    } else if ($name == 'Created By: Z-A') {
-         $stmt = $db->prepare('SELECT u.username
-         ,   p.pattern_title
-         ,   p.pattern_img
-         ,   p.pattern_id
-         ,   t.time_required
-         ,   b.type 
-         ,   b.size
-         FROM story_blanket_user u 
-         INNER JOIN pattern p 
-         ON p.created_by = u.user_id 
-         INNER JOIN time_required t 
-         ON p.time_required = t.time_id
-         INNER JOIN blanket_size b
-         ON p.blanket_type = b.size_id
-         INNER JOIN saved_pattern sp
-         ON p.pattern_id = sp.pattern_id
-         WHERE sp.user_id =:user
-         ORDER BY u.username DESC;');
-        $stmt->bindValue(':user', $id, PDO::PARAM_INT);
-    } else if ($time != "") {
+    }   else if ($time != "") {
         $stmt = $db->prepare('SELECT u.username
         ,   p.pattern_title
         ,   p.pattern_img
@@ -377,7 +329,7 @@ $db = get_db();
         INNER JOIN saved_pattern sp
         ON p.pattern_id = sp.pattern_id
         WHERE t.time_required =:time
-        AND sp.user_id =:user;');
+        AND p.created_by =:user;');
         $stmt->bindValue(':time', $time, PDO::PARAM_STR);
         $stmt->bindValue(':user', $id, PDO::PARAM_INT);
     }
@@ -385,14 +337,13 @@ $db = get_db();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         
     if($rows == null) {
-            echo "<h3 class='text-white'>It looks like you haven't added any patterns to this catagory, please browse through our patterns to find some you like</h3>";
+            echo "<h3 class='text-white'>It looks like you haven't added any patterns to this catagory, please click the tab \"Add Pattern\" to create one.</h3>";
         } else {
             echo "<table class='table margin-top-10 text-white'>
                     <tr>
                         <th>Title</th>
                         <th>Image</th>
                         <th>Details</th>
-                        <th>Remove</th>
                     </tr>";
             foreach($rows as $row) {
             $title = $row['pattern_title'];
@@ -405,7 +356,6 @@ $db = get_db();
             echo "<tr><td> $title - <br> By: $username</td>";
             echo "<td><img src='$image' width='150'></td>";
             echo "<td>Time: $time<br> Type: $type<br> Size: $size</td>"; 
-            echo "<td><form action='remove.php' method='get'><input type='hidden' name='name' value='$name' ><input type='hidden' name='pattern' value='$pattern_id'><button type='submit' class='btn btn-default' value='save'><span class='glyphicon glyphicon-remove'> </span></button></form><td></tr>";
             }
               echo "</table>"; 
         }
