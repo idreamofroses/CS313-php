@@ -1,11 +1,4 @@
 <?php
-//session_start();
-//if (!isset($_SESSION["user"])) {
-///	header("Location: login.php"); /* Redirect browser *///
-	//exit();
-//}
-///$username = $_SESSION["user"];
-//$id = (int)$_SESSION['id']; 
 
 //browse varriables
 $fullname = htmlspecialchars($_POST['fullname']);

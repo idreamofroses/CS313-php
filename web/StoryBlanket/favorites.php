@@ -7,11 +7,11 @@ if (!isset($_SESSION["user"])) {
 }
 $username = $_SESSION["user"];
 $id = (int)$_SESSION["id"];
-?>
-<?php //browse varriables
+
+//browse varriables
     $name = $_GET['name'];
-?>
-<?php //database
+
+//database
 
   require("dbConnect.php");
 $db = get_db();

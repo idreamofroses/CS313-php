@@ -8,9 +8,6 @@ if (!isset($_SESSION["user"])) {
 $username = $_SESSION["user"];
 $id = (int)$_SESSION["id"];
 
-//browse varriables
-//    $name = htmlspecialchars($_GET['name']);
-
 //database
 
   require("dbConnect.php");

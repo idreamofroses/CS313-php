@@ -1,6 +1,5 @@
 <?php
-    //this will need php for creating users and verifying user login info
-    $status = htmlspecialchars($_GET['status']);
+
 ?>
 <!DOCTYPE html>
 <html>
