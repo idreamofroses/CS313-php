@@ -195,7 +195,6 @@ $db = get_db();
             ,   p.pattern_id
             ,   p.pattern_title
             ,   p.pattern_img
-            ,   p.pattern_id
             ,   t.time_required
             ,   b.type 
             ,   b.size
@@ -206,8 +205,6 @@ $db = get_db();
             ON p.time_required = t.time_id
             INNER JOIN blanket_size b
             ON p.blanket_type = b.size_id
-            INNER JOIN saved_pattern sp
-            ON p.pattern_id = sp.pattern_id
             WHERE p.created_by =:user;');
        $stmt->bindValue(':user', $id, PDO::PARAM_INT);
     } else if ($name == 'My Pattern Types: A-Z') {
@@ -225,8 +222,6 @@ $db = get_db();
          ON p.time_required = t.time_id
          INNER JOIN blanket_size b
          ON p.blanket_type = b.size_id
-         INNER JOIN saved_pattern sp
-         ON p.pattern_id = sp.pattern_id
          WHERE p.created_by =:user
          ORDER BY b.type ASC;');
         $stmt->bindValue(':user', $id, PDO::PARAM_INT);
@@ -245,8 +240,6 @@ $db = get_db();
          ON p.time_required = t.time_id
          INNER JOIN blanket_size b
          ON p.blanket_type = b.size_id
-         INNER JOIN saved_pattern sp
-         ON p.pattern_id = sp.pattern_id
          WHERE p.created_by =:user
          ORDER BY b.type DESC;');
         $stmt->bindValue(':user', $id, PDO::PARAM_INT);
@@ -265,8 +258,6 @@ $db = get_db();
          ON p.time_required = t.time_id
          INNER JOIN blanket_size b
          ON p.blanket_type = b.size_id
-         INNER JOIN saved_pattern sp
-         ON p.pattern_id = sp.pattern_id
          WHERE b.type =:type
          AND p.created_by =:user;');
         $stmt->bindValue(':type', $type, PDO::PARAM_STR);
@@ -286,8 +277,6 @@ $db = get_db();
          ON p.time_required = t.time_id
          INNER JOIN blanket_size b
          ON p.blanket_type = b.size_id
-         INNER JOIN saved_pattern sp
-         ON p.pattern_id = sp.pattern_id
          WHERE p.created_by =:user
          ORDER BY p.pattern_title ASC;');
          $stmt->bindValue(':user', $id, PDO::PARAM_INT);
@@ -306,8 +295,6 @@ $db = get_db();
          ON p.time_required = t.time_id
          INNER JOIN blanket_size b
          ON p.blanket_type = b.size_id
-         INNER JOIN saved_pattern sp
-         ON p.pattern_id = sp.pattern_id
          WHERE p.created_by =:user
          ORDER BY p.pattern_title DESC;');
         $stmt->bindValue(':user', $id, PDO::PARAM_INT);
@@ -326,8 +313,6 @@ $db = get_db();
         ON p.time_required = t.time_id
         INNER JOIN blanket_size b
         ON p.blanket_type = b.size_id
-        INNER JOIN saved_pattern sp
-        ON p.pattern_id = sp.pattern_id
         WHERE t.time_required =:time
         AND p.created_by =:user;');
         $stmt->bindValue(':time', $time, PDO::PARAM_STR);
