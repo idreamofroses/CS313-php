@@ -249,7 +249,7 @@ $db = get_db();
         $stmt = $db->prepare('SELECT u.username
          , p.pattern_title
          , p.pattern_img
-         , p.patten_id
+         , p.pattern_id
          , t.time_required
          , b.type
          , b.size 
