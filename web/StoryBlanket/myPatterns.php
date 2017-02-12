@@ -106,7 +106,7 @@ $db = get_db();
                     <li class="nav-item dropdown">
                         <a class="myLink dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Blanket Type</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="myPatterns.php"> All Types: A-Z</a>
+                            <a class="dropdown-item" href="myPatterns.php?name=My Pattern Types: A-Z"> All Types: A-Z</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="myPatterns.php?name=My Pattern Types: Z-A"> All Types: Z-A</a>
                             <div class="dropdown-divider"></div>
