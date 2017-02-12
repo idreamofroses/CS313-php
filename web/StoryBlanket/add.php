@@ -35,7 +35,7 @@ $statement->bindValue(":size", $size, PDO::PARAM_INT);
 $statement->bindValue(":user", $id, PDO::PARAM_INT);
 $statement->execute(); 
 
-header("Location: myPatterns.php?Browse My Patterns");
+header("Location: myPatterns.php?name=Browse My Patterns");
 die(); 
 
 ?>
