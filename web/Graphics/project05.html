@@ -1,0 +1,159 @@
+<html>
+	<head>
+		<title>My first Three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+</head>
+<body>
+
+	<div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
+	<script src="../js/three.min.js"></script>
+
+	<script>
+	/********************************
+	* Name: Katherine Hobbs
+	* Extra: Music, individual cubes spin
+	*********************************/
+		"use strict"
+		// Note!!! you must have a sub folder called "js" at the same directory level
+		//         as this folder.
+		var scene, camera, renderer;
+		var geometry, material;
+		var mesh, mesh1, mesh2;
+		var lightRed, lightBlue, lightGreen, pointLightHelper;
+		var rotation = 0;
+		var clock = new THREE.Clock();
+
+		init();
+		animate();
+		function init() {
+			// Create the main scene for the 3D drawing
+			scene = new THREE.Scene();
+			// Every scene needs a camera
+			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+			camera.position.z = 600;
+
+			//extra
+			//Create an AudioListener and add it to the camera
+			var listener = new THREE.AudioListener();
+			camera.add( listener );
+
+			// create a global audio source
+			var sound = new THREE.Audio( listener );
+
+			var audioLoader = new THREE.AudioLoader();
+
+			//Load a sound and set it as the Audio object's buffer
+
+			audioLoader.load( 'Le_disco_archangel_clasique.ogg', function( buffer ) {
+				sound.setBuffer( buffer );
+				sound.setLoop(true);
+				sound.setVolume(0.5);
+				sound.play();
+			});
+
+		//	var helper = new THREE.CameraHelper( camera );
+		//	scene.add( helper );
+
+			//axis helper
+			//var object = new THREE.AxisHelper( 450 );
+			//object.position.set( 0, 0, 0 );
+			//scene.add( object );
+
+
+			// TODO - add cubes to your scene
+			var loader = new THREE.CubeTextureLoader();
+			loader.setPath( 'pisa/' );
+
+
+			geometry = new THREE.BoxGeometry( 50, 50, 50 );
+			material = new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading } );
+			// a mesh needs the geometry (aka lines and points) and material (aka surface)
+			for (var i = -90; i < 91; i += 90) {
+				for(var j = -90; j < 91; j += 90) {
+					mesh = new THREE.Mesh( geometry, material );
+    			mesh.position.set(j, i, 0);
+					scene.add( mesh );
+
+					mesh1 = new THREE.Mesh( geometry, material );
+					mesh1.position.set(j, i, 90);
+					scene.add( mesh1 );
+
+					mesh2 = new THREE.Mesh( geometry, material );
+					mesh2.position.set(j, i, -90);
+					scene.add( mesh2 );
+				}
+			}
+
+
+
+			// TODO - add point lights
+			var sphereSize = 3;
+			var sphere = new THREE.SphereGeometry( 3, 3, 3 );
+
+      lightRed = new THREE.PointLight( 0xff0000, 1.0, 700 );
+			//lightRed.position.set( 0, 0, 60 );
+			lightRed.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0000 } ) ) );
+		  scene.add( lightRed );
+
+		//	pointLightHelper = new THREE.PointLightHelper( lightRed, sphereSize);
+		//	scene.add( pointLightHelper );
+
+			lightBlue = new THREE.PointLight( 0x0000ff, 1.0, 700 );
+			lightBlue.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0x0000ff } ) ) );
+		//	lightBlue.position.set( 0, 0, 60 );
+			scene.add( lightBlue );
+
+			//pointLightHelper = new THREE.PointLightHelper( lightBlue, sphereSize );
+			//scene.add( pointLightHelper );
+
+			lightGreen = new THREE.PointLight( 0x00ff00, 1.0, 700 );
+			//lightGreen.position.set( 0, 0, 60 );
+			lightGreen.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0x00ff00 } ) ) );
+			scene.add( lightGreen );
+
+			//pointLightHelper = new THREE.PointLightHelper( lightGreen, sphereSize );
+			//scene.add( pointLightHelper );
+
+			// the renderer renders the scene using the objects, lights and camera
+			renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			// Attach the threeJS renderer to the HTML page
+			document.body.appendChild( renderer.domElement );
+		}
+		// This is the game/animation loop
+		function animate() {
+			requestAnimationFrame( animate );
+
+			// TODO - move the camera
+			rotation -= 0.005;
+
+			camera.position.x = Math.sin(rotation) * 600;
+		  camera.position.z = Math.cos(rotation) * 600;
+			camera.lookAt( scene.position ); // the origin
+
+			// TODO - move the lights
+			var time = Date.now() * 0.0005;
+			lightRed.position.x = Math.sin( time * 1 ) * 300;
+			lightRed.position.z = Math.cos( time * 1 ) * 300;
+
+			lightBlue.position.x = Math.sin( time * 3 ) * 300;
+			lightBlue.position.y = Math.cos( time * 3 ) * 300;
+
+			lightGreen.position.y = Math.cos( time * 2 ) * 300;
+			lightGreen.position.z = Math.cos( time * 2 ) * 300;
+
+			//extra
+			for(var i = 0; i < 27; i++) {
+				scene.children[i].rotation.x += 0.005;
+				scene.children[i].rotation.y += 0.01;
+			}
+
+			renderer.render( scene, camera );
+		}
+</script>
+
+</body>
+</html>
