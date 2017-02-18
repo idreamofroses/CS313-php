@@ -10,7 +10,7 @@ $id = (int)$_SESSION["id"];
 
 //database
 
-  require("dbConnect.php");
+require("dbConnect.php");
 $db = get_db();
 
 ?>

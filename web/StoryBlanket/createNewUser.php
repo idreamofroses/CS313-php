@@ -11,10 +11,6 @@ $email = htmlspecialchars($_POST['email']);
 require("dbConnect.php");
 $db = get_db();
 
-echo "username: $username<br>";
-echo "fullname: $fullname<br>";
-echo "pass: $password<br>";
-echo "email: $email<br>";
 
 $statement = $db->prepare("INSERT INTO story_blanket_user(username, password, full_name, email)
 VALUES(:username, :pass, :fullname, :email);");

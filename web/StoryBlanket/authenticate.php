@@ -18,12 +18,10 @@ AND u.password =:pass');
 $stmt->bindValue(':username', $username, PDO::PARAM_STR);
 $stmt->bindValue(':pass', $userpass, PDO::PARAM_STR);
 $stmt->execute();
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    foreach($rows as $row) {
-        $username = $row['username'];
-        $id = $row['user_id'];
-    } 
+$username = $row['username'];
+$id = $row['user_id']; 
 
 $_SESSION["user"] = $username;
 $_SESSION["id"] = $id;
@@ -34,5 +32,5 @@ if($id == 0) {
 } else {
     header("Location: browse.php?name=Browse All Patterns");
 }
-
+die();
 ?>

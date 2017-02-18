@@ -12,8 +12,7 @@ $id = (int)$_SESSION["id"];
     $name = htmlspecialchars($_GET['name']);
 
 //database
-
-  require("dbConnect.php");
+require("dbConnect.php");
 $db = get_db();
 
 ?>

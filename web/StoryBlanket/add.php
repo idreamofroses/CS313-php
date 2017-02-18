@@ -8,14 +8,13 @@ $username = $_SESSION["user"];
 $id = (int)$_SESSION['id'];
 
 //browse varriables
-//$name = htmlspecialchars($_GET['name']);
 $title = htmlspecialchars($_POST['title']);
 $image = htmlspecialchars($_POST['image']);
 $size = (int)htmlspecialchars($_POST['size']);
 $time = (int)htmlspecialchars($_POST['time']);
 $story = (int)htmlspecialchars($POST['story']);
-//database
 
+//database
 require("dbConnect.php");
 $db = get_db();
 
