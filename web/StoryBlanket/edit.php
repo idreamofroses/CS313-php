@@ -13,18 +13,30 @@ $image = htmlspecialchars($_POST['image']);
 $size = (int)htmlspecialchars($_POST['size']);
 $time = (int)htmlspecialchars($_POST['time']);
 $story = htmlspecialchars($_POST['story']);
+$pattern_id = (int)htmlspecialchars($_POST['pattern']);
 
+echo $title."<br>";
+echo $image."<br>";
+echo $size."<br>";
+echo $time."<br>";
+echo $story."<br>";
+echo $pattern_id;
 //database
 require("dbConnect.php");
 $db = get_db();
 
-$statement = $db->prepare("INSERT INTO pattern(pattern_title, pattern_img, time_required, blanket_type, created_by, story)
-VALUES(:title, :img, :time, :size, :user, :story);");
+$statement = $db->prepare("UPDATE pattern 
+                            SET pattern_title = :title
+                            ,   pattern_img = :img
+                            ,   time_required = :time
+                            ,   blanket_type = :size 
+                            ,   story = :story
+                            WHERE pattern_id = :pattern_id");
 $statement->bindValue(":title", $title, PDO::PARAM_STR);
 $statement->bindValue(":img", $image, PDO::PARAM_STR);
 $statement->bindValue(":time", $time, PDO::PARAM_INT);
 $statement->bindValue(":size", $size, PDO::PARAM_INT);
-$statement->bindValue(":user", $id, PDO::PARAM_INT);
+$statement->bindValue(":pattern_id", $pattern_id, PDO::PARAM_INT);
 $statement->bindValue(":story", $story, PDO::PARAM_STR);
 $statement->execute(); 
 

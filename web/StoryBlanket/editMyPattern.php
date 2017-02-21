@@ -7,7 +7,6 @@ if (!isset($_SESSION["user"])) {
 }
 $username = $_SESSION["user"];
 $id = (int)$_SESSION["id"];
-
 //database
 
 require("dbConnect.php");
@@ -47,7 +46,7 @@ $db = get_db();
             <li><a href="browse.php?name=Browse All Patterns" >Browse</a>
             </li>
             <li><a href="favorites.php?name=My Favorites">Favorites</a></li>
-            <li class="active"><a href="addNewPattern.php">Add Pattern</a></li>
+            <li class="active"><a href="#">Edit Pattern</a></li>
             <li><a href="myPatterns.php?name=Browse My Patterns">My Patterns</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -88,21 +87,45 @@ $db = get_db();
 
             <!-- Main component for a primary marketing message or call to action -->
             <div class="jumbotron bg-turk">
-                <h1>Add New Pattern</h1>
+                <h1>Edit My Pattern</h1>
             </div>
         </div>
 
 <div class="container center_div">
 <div class="col-md-5 col-md-push-3">
     <div class="form-area">  
-        <form action="add.php" method="post" role="form"><br>
+        <?php
+            $pattern_id = htmlspecialchars($_POST['pattern']);
+            $stmt = $db->prepare('SELECT p.pattern_title
+                                ,   p.pattern_img
+                                ,   t.time_required 
+                                ,   b.size
+                                ,   p.story
+                                FROM pattern p 
+                                INNER JOIN time_required t 
+                                ON p.time_required = t.time_id
+                                INNER JOIN blanket_size b
+                                ON p.blanket_type = b.size_id
+                                WHERE p.pattern_id = :id'); 
+            $stmt->bindValue(':id', $pattern_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $pattern = $stmt->fetch(PDO::FETCH_ASSOC);
+            $pattern_title = $pattern['pattern_title'];
+            $pattern_img = $pattern['pattern_img'];
+            $pattern_size = $pattern['size'];
+            $pattern_time = $pattern['time_required'];
+            $pattern_story = $pattern['story'];
+           // echo $pattern_time;
+        ?>
+        <form action="edit.php" method="post" role="form"><br>
+                    <input type="hidden" name="pattern" <?php echo"value='$pattern_id'"?> >
     				<div class="form-group">
                         <label class="text-white">Pattern Title</label>
-						<input type="text" class="form-control" name="title" placeholder="e.g. Animal Kingdom" required>
+						<input type="text" class="form-control" name="title" placeholder="e.g. Animal Kingdom" <?php echo "value='$pattern_title'"; ?> required>
 					</div>
 					<div class="form-group">
                         <label class="text-white">Image URL</label>
-						<input type="url" class="form-control" name="image" placeholder="http://" required>
+						<input type="url" class="form-control" name="image" placeholder="http://" <?php echo "value='$pattern_img'"; ?> required>
 					</div>
 					<div class="form-group">
                         <label class="text-white">Pattern Type &amp; Size</label>
@@ -115,7 +138,11 @@ $db = get_db();
 	                               $size_id = $row['size_id'];
 	                               $type = $row['type'];
 	                               $size = $row['size'];
-	                               echo "<option value='$size_id'>$type - $size</option>";
+                                    if($pattern_size == $size) {
+                                        echo "<option value='$size_id' selected>$type - $size</option>";
+                                    } else {
+                                        echo "<option value='$size_id'>$type - $size</option>";
+                                    }
                                 }
                             ?>
                         </select>
@@ -130,19 +157,23 @@ $db = get_db();
                                 foreach ($rows as $row) {
 	                               $time_id = $row['time_id'];
 	                               $time = $row['time_required'];
-                                    if($time != '< 5 hours' && $time != '> 30 hours') {
-	                                   echo "<option value='$time_id'>$time</option>";
+                                   if($pattern_time == $time) {
+	                                       echo "<option selected value='$time_id'> $time </option>";
+                                    } else {
+                                        if($time != '< 5 hours' && $time != '> 30 hours') {
+	                                       echo "<option value='$time_id'> $time </option>";
                                     }
+                                   }
                                 }
                             ?>
                         </select>
 					</div>
                     <div class="form-group">
                         <label class="text-white">Story</label>
-                        <textarea class="form-control" name="story" type="textarea" placeholder="Please share the story behind your pattern" maxlength="2000" rows="7"></textarea>      
+                        <textarea class="form-control" name="story" type="textarea" placeholder="Please share the story behind your pattern" maxlength="2000" rows="7"><?php if($pattern_story != null) echo $pattern_story ?></textarea>      
                     </div>
             
-                <button type="submit" class="btn pull-right">Add Pattern</button>
+                <button type="submit" class="btn pull-right">Save Pattern</button>
         </form>
     </div>
 </div>

@@ -13,7 +13,7 @@ $id = (int)$_SESSION["id"];
 
 //database
 
-  require("dbConnect.php");
+require("dbConnect.php");
 $db = get_db();
 
 ?>
@@ -192,12 +192,13 @@ $db = get_db();
                         
     if($name == 'Browse My Patterns') {
         $stmt = $db->prepare('SELECT u.username
-            ,   p.pattern_id
-            ,   p.pattern_title
-            ,   p.pattern_img
-            ,   t.time_required
-            ,   b.type 
-            ,   b.size
+            , p.pattern_id
+            , p.pattern_title
+            , p.pattern_img
+            , p.story
+            , t.time_required
+            , b.type 
+            , b.size
             FROM story_blanket_user u 
             INNER JOIN pattern p 
             ON p.created_by = u.user_id 
@@ -211,7 +212,8 @@ $db = get_db();
          $stmt = $db->prepare('SELECT u.username
          , p.pattern_title
          , p.pattern_img
-         ,   p.pattern_id
+         , p.pattern_id
+         , p.story
          , t.time_required
          , b.type
          , b.size 
@@ -229,7 +231,8 @@ $db = get_db();
          $stmt = $db->prepare('SELECT u.username
          , p.pattern_title
          , p.pattern_img
-         ,   p.pattern_id
+         , p.pattern_id
+         , p.story
          , t.time_required
          , b.type
          , b.size 
@@ -248,6 +251,7 @@ $db = get_db();
          , p.pattern_title
          , p.pattern_img
          , p.pattern_id
+         , p.story
          , t.time_required
          , b.type
          , b.size 
@@ -267,6 +271,7 @@ $db = get_db();
          , p.pattern_title
          , p.pattern_img
          , p.pattern_id
+         , p.story
          , t.time_required
          , b.type
          , b.size 
@@ -282,12 +287,13 @@ $db = get_db();
          $stmt->bindValue(':user', $id, PDO::PARAM_INT);
     } else if ($name == 'My Pattern Titles: Z-A') {
          $stmt = $db->prepare('SELECT u.username
-         ,   p.pattern_title
-         ,   p.pattern_img
-         ,   p.pattern_id
-         ,   t.time_required
-         ,   b.type 
-         ,   b.size
+         , p.pattern_title
+         , p.pattern_img
+         , p.pattern_id
+         , p.story
+         , t.time_required
+         , b.type 
+         , b.size
          FROM story_blanket_user u 
          INNER JOIN pattern p 
          ON p.created_by = u.user_id 
@@ -300,12 +306,13 @@ $db = get_db();
         $stmt->bindValue(':user', $id, PDO::PARAM_INT);
     }   else if ($time != "") {
         $stmt = $db->prepare('SELECT u.username
-        ,   p.pattern_title
-        ,   p.pattern_img
-        ,   p.pattern_id
-        ,   t.time_required
-        ,   b.type 
-        ,   b.size
+        , p.pattern_title
+        , p.pattern_img
+        , p.pattern_id
+        , p.story
+        , t.time_required
+        , b.type 
+        , b.size
         FROM story_blanket_user u 
         INNER JOIN pattern p 
         ON p.created_by = u.user_id 
@@ -329,6 +336,7 @@ $db = get_db();
                         <th>Title</th>
                         <th>Image</th>
                         <th>Details</th>
+                        <th>Edit</td>
                     </tr>";
             foreach($rows as $row) {
             $title = $row['pattern_title'];
@@ -338,9 +346,35 @@ $db = get_db();
                 $type = $row['type'];
                 $size = $row['size'];
                 $pattern_id = $row['pattern_id'];
+                $story = $row['story'];
             echo "<tr><td> $title - <br> By: $username</td>";
-            echo "<td><img src='$image' width='150'></td>";
+            echo "<td><a href='#' data-toggle='modal' data-target='#$pattern_id'><img src='$image' width='150'></a></td>";
             echo "<td>Time: $time<br> Type: $type<br> Size: $size</td>"; 
+            echo "<td><form action='editMyPattern.php' method='post'><input type='hidden' name='pattern' value='$pattern_id'><button type='submit' class='btn btn-default' value='save'><span class='glyphicon glyphicon-edit'> </span></button></form><td></tr>";
+            echo "<div class='container'><div class='row'><div class='col-md-3'><div class='modal fade' id='$pattern_id'>";
+            echo "<div class='modal-dialog'><div class='modal-content'><div class='modal-header'><h3><b>$title - $username</b></h3>
+                                </div>
+                                <div class='modal-body'>
+                                    <img src='$image' width='250' class='pull-left' style='margin-right: 15px;'>
+                                     <div style='padding-left: 50px;'>
+                                        <h4><b> Blanket Details: </b></h4>
+                                        <p> <b>Time: </b> $time 
+                                        <br><b>Type: </b> $type
+                                        <br><b>Size: </b>$size</p>
+                                    </div>
+                                    <br>";
+             if ($story != null) {
+                echo "              <h4><b>This Blankets Story: </b></h4>
+                                    <p>$story<p>
+                                ";
+             }
+             echo              "</div>
+                                <div class='modal-footer'>
+                                    <form action='editMyPattern.php' method='post'>
+                                        <input type='button' class='btn btn-default' data-dismiss='modal' value='Done'>
+                                        <input type='hidden' name='pattern' value='$pattern_id'><button type='submit' class='btn btn-default' value='edit'>Edit</button>
+                                    </form>
+                                </div> </div> </div> </div> </div> </div>   </div>";
             }
               echo "</table>"; 
         }

@@ -1,7 +1,7 @@
 <?php
+
 $username = htmlspecialchars($_POST["username"]);
-$userpass = htmlspecialchars($_POST["password"]);
-$id = 0;
+$password = htmlspecialchars($_POST["password"]);
 session_start();
 
 //database
@@ -10,27 +10,21 @@ require("dbConnect.php");
 $db = get_db();
 
 
-$stmt = $db->prepare('SELECT u.user_id
-, u.username
-FROM story_blanket_user u
-WHERE u.username =:username
-AND u.password =:pass');
+$stmt = $db->prepare('SELECT u.password, u.user_id
+                      FROM story_blanket_user u
+                      WHERE u.username =:username');
 $stmt->bindValue(':username', $username, PDO::PARAM_STR);
-$stmt->bindValue(':pass', $userpass, PDO::PARAM_STR);
 $stmt->execute();
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
+$user = $stmt->fetch();
 
-$username = $row['username'];
-$id = $row['user_id']; 
+if(password_verify($password, $user['password'])) {
+        $_SESSION['user'] = $username;
+        $_SESSION["id"] = $user['user_id'];
+        header("Location: browse.php?name=Browse All Patterns");
+        die();
+    } else {
+        header("Location: login.php?status=unsuccesful");
+        die();
+    }
 
-$_SESSION["user"] = $username;
-$_SESSION["id"] = $id;
-
-
-if($id == 0) {
-    header("Location: login.php?status=unsuccesful");
-} else {
-    header("Location: browse.php?name=Browse All Patterns");
-}
-die();
 ?>
